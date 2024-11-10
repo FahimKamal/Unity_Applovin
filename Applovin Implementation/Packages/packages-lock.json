@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "com.applovin.mediation.ads": {
+      "version": "8.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.external-dependency-manager": "1.2.182"
+      },
+      "url": "https://unity.packages.applovin.com"
+    },
+    "com.google.external-dependency-manager": {
+      "version": "1.2.182",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.unity.burst": {
       "version": "1.8.12",
       "depth": 1,
@@ -25,7 +41,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.28",
+      "version": "3.0.34",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -115,7 +131,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "3.0.6",
+      "version": "3.0.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {
