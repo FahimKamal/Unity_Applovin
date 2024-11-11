@@ -25,7 +25,7 @@ public class ApplovinManager : MonoBehaviour
     [SerializeField] private string RewardedAdUnitId = "ENTER_IOS_REWARD_AD_UNIT_ID_HERE";
     [SerializeField] private string RewardedInterstitialAdUnitId = "ENTER_IOS_REWARD_INTER_AD_UNIT_ID_HERE";
     [SerializeField] private string BannerAdUnitId = "ENTER_IOS_BANNER_AD_UNIT_ID_HERE";
-    [SerializeField] private string MRecAdUnitId = "ENTER_IOS_MREC_AD_UNIT_ID_HERE";
+    // [SerializeField] private string MRecAdUnitId = "ENTER_IOS_MREC_AD_UNIT_ID_HERE";
 #else // UNITY_ANDROID
     [SerializeField] private string InterstitialAdUnitId = "ENTER_ANDROID_INTERSTITIAL_AD_UNIT_ID_HERE";
     [SerializeField] private string RewardedAdUnitId = "ENTER_ANDROID_REWARD_AD_UNIT_ID_HERE";
@@ -33,6 +33,8 @@ public class ApplovinManager : MonoBehaviour
     [SerializeField] private string BannerAdUnitId = "ENTER_ANDROID_BANNER_AD_UNIT_ID_HERE";
     // [SerializeField] private string MRecAdUnitId = "ENTER_ANDROID_MREC_AD_UNIT_ID_HERE";
 #endif
+    [SerializeField] private MaxSdkBase.BannerPosition _bannerPosition = MaxSdkBase.BannerPosition.BottomCenter;
+    
     private bool _isBannerShowing;
     private bool _isMRecShowing;
 
@@ -376,6 +378,7 @@ public class ApplovinManager : MonoBehaviour
     
     #region Banner Ad Methods
 
+    
     private void InitializeBannerAds()
     {
         // Attach Callbacks
@@ -386,13 +389,13 @@ public class ApplovinManager : MonoBehaviour
 
         // Banners are automatically sized to 320x50 on phones and 728x90 on tablets.
         // You may use the utility method `MaxSdkUtils.isTablet()` to help with view sizing adjustments.
-        MaxSdk.CreateBanner(BannerAdUnitId, MaxSdkBase.BannerPosition.TopCenter);
+        MaxSdk.CreateBanner(BannerAdUnitId, _bannerPosition);
 
         // Set background or background color for banners to be fully functional.
         MaxSdk.SetBannerBackgroundColor(BannerAdUnitId, Color.black);
     }
 
-    private void ToggleBannerVisibility()
+    public void ToggleBannerVisibility()
     {
         if (!_isBannerShowing)
         {
@@ -404,6 +407,20 @@ public class ApplovinManager : MonoBehaviour
         }
 
         _isBannerShowing = !_isBannerShowing;
+    }
+
+    public void ShowBannerAd()
+    {
+        if (_isBannerShowing) return;
+        MaxSdk.ShowBanner(BannerAdUnitId);
+        _isBannerShowing = true;
+    }
+
+    public void HideBannerAd()
+    {
+        if (!_isBannerShowing) return;
+        MaxSdk.HideBanner(BannerAdUnitId);
+        _isBannerShowing = false;
     }
 
     private void OnBannerAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
