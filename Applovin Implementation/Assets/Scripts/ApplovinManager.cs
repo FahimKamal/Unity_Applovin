@@ -8,13 +8,14 @@ public class ApplovinManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance)
         {
-            Instance = this;
+            DestroyImmediate(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -57,6 +58,7 @@ public class ApplovinManager : MonoBehaviour
             InitializeRewardedInterstitialAds();
             InitializeBannerAds();
             // InitializeMRecAds();
+            MaxSdk.ShowMediationDebugger();
         };
 
         MaxSdk.SetSdkKey(maxSdkKey);
