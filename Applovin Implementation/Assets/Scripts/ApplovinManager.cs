@@ -36,6 +36,8 @@ public class ApplovinManager : MonoBehaviour
 #endif
     [SerializeField] private MaxSdkBase.BannerPosition _bannerPosition = MaxSdkBase.BannerPosition.BottomCenter;
     
+    [SerializeField] private bool mediationDebuggerOn = false;
+    
     private bool _isBannerShowing;
     private bool _isMRecShowing;
 
@@ -58,7 +60,10 @@ public class ApplovinManager : MonoBehaviour
             InitializeRewardedInterstitialAds();
             InitializeBannerAds();
             // InitializeMRecAds();
-            MaxSdk.ShowMediationDebugger();
+            if (mediationDebuggerOn)
+            {
+                MaxSdk.ShowMediationDebugger();
+            }
         };
 
         MaxSdk.SetSdkKey(maxSdkKey);
